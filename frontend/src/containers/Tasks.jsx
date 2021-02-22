@@ -1,22 +1,17 @@
 import React, { Fragment, useEffect, useReducer } from "react";
+import styled from 'styled-components';
 
 import { fetchTasks } from "../apis/fetchTasks";
 import { fetchTasksReducer, initialState, tasksActionTypes } from "../reducers/fetchTasksReducer";
 
-import styled from 'styled-components';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { TaskContents } from '../components/TaskContents';
+import { CreateTaskDialog } from '../components/CreateTaskDialog';
 
-
-const TasksPaper = styled(Paper)`
+const CreateButtonWrapper = styled.div`
+  text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 40px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
 `;
-
 export const Tasks = () => {
   const [tasksState, dispatch] = useReducer(fetchTasksReducer, initialState);
 
@@ -35,21 +30,10 @@ export const Tasks = () => {
 
   return (
     <Fragment>
-      <Grid container justify="space-around">
-        <Grid item xs={8}>
-          {
-            tasksState.tasksList.map((task, index) => 
-              <TasksPaper key={index}>      
-                  <Grid item xs={10}>
-                    <p>
-                      {task.title}
-                    </p>
-                  </Grid>
-              </TasksPaper>
-            )
-          } 
-        </Grid>
-      </Grid>
+      <CreateButtonWrapper>
+        <CreateTaskDialog />
+      </CreateButtonWrapper>
+      <TaskContents tasksState={tasksState} />
     </Fragment>
   )
 };
