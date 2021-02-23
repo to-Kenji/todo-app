@@ -6,14 +6,19 @@ import {
 } from 'react-router-dom';
 
 import { Tasks } from './containers/Tasks';
+import { SnackbarContextProvider } from './contexts/SnackbarContext';
+import { SimpleSnackbar } from './containers/SimpleSnackbar';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/tasks' component={Tasks}/>
-      </Switch>
-    </Router>
+    <SnackbarContextProvider>
+      <SimpleSnackbar />
+      <Router>
+        <Switch>
+          <Route exact path='/tasks' component={Tasks}/>
+        </Switch>
+      </Router>
+    </SnackbarContextProvider>
   );
 }
 

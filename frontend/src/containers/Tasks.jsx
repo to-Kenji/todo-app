@@ -1,6 +1,8 @@
-import React, { Fragment, useEffect, useReducer, useState } from "react";
+import React, { Fragment, useContext, useEffect, useReducer, useState } from "react";
 import styled from 'styled-components';
 
+import { SnackbarContext } from '../contexts/SnackbarContext';
+import { SNACK_COLOR } from '../SnackColor';
 import { fetchTasks, postTask } from "../apis/Tasks";
 import { 
   fetchTasksReducer,
@@ -20,6 +22,7 @@ export const Tasks = () => {
   const [tasksState, dispatch] = useReducer(fetchTasksReducer, TasksListInitialState);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [titleState, setTitleState] = useState("")
+  const { toggleSnack } = useContext(SnackbarContext);
 
   const handleClose = () => {
     setDialogOpen(false)
@@ -37,12 +40,17 @@ export const Tasks = () => {
           task: data.task
         }
       })
+      toggleSnack(true, `${SNACK_COLOR.success}`, 'You created a new Task!')
+    })
+    .catch((e) => {
+      console.error(e)
+      toggleSnack(true, `${SNACK_COLOR.error}`, 'Create failed!')
     })
     setTitleState("")
   };
 
   useEffect(() => {
-    dispatch({type: tasksActionTypes.FETCHING});
+    dispatch({type: tasksActionTypes.FETCHING})
     fetchTasks()
     .then((data) => {
       dispatch({
@@ -52,7 +60,7 @@ export const Tasks = () => {
         }
       })
     })
-    .catch((e) => console.error(e));
+    .catch((e) => console.error(e))
   }, [])
 
   return (
