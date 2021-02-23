@@ -15,14 +15,14 @@ module Api
             task: task
           }, status: :created
         else
-          render json: {message: '投稿失敗'}, status: :internal_server_error
+          render json: {}, status: :internal_server_error
         end
       end
 
       def destroy
         task = Task.find(params[:id])
         task.delete
-        render json: {message: 'Deleted'}, status: :ok
+        render json: {}, status: :ok
       end
 
       private

@@ -17,15 +17,17 @@ export const TaskContents = (props) => {
     <Grid container justify="space-around">
       <Grid item xs={8}>
         {
-          props.tasksState.tasksList.map((task, index) => 
-            <TasksPaper key={index}>      
-              <Grid item xs={10}>
-                <p>
-                  {task.title}
-                </p>
-              </Grid>
-            </TasksPaper>
-          )
+          props.tasksList.map((task) => {
+            return (
+              <TasksPaper key={task.id}>      
+                <Grid item xs={10}>
+                  <p>
+                    {task.title}
+                  </p>
+                </Grid>
+              </TasksPaper>
+            )
+          })
         } 
      </Grid>
    </Grid>

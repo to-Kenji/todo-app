@@ -8,3 +8,13 @@ export const fetchTasks = async() => {
   })
   .catch(error => console.error(error))
 };
+
+export const postTask = async(params) => {
+  return await axios.post(postsIndexUrl, {
+    title: params.title
+  })
+  .then(resp => {
+    return resp.data
+  })
+  .catch((error) => {throw error;})
+};

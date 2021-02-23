@@ -7,23 +7,21 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export const CreateTaskDialog = () => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+export const CreateTaskDialog = ({
+  isOpen,
+  handleClickOpen,
+  handleClose,
+  titleState,
+  setTitleState,
+  handleSubmit,
+}) => {
 
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Create New Task
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Create New Task</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -34,18 +32,21 @@ export const CreateTaskDialog = () => {
           </DialogContentText>
           <TextField
             autoFocus
+            name="title"
             margin="dense"
             id="title"
             label="Task?"
             type="title"
             fullWidth
+            value={titleState}
+            onChange={event => setTitleState(event.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Create
           </Button>
         </DialogActions>
