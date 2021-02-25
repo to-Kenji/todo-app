@@ -5,7 +5,7 @@ export const SnackbarContext = createContext();
 export const SnackbarContextProvider = (props) => {
   const [ snackState, setSnackState ] = useState({
     isOpen: false,
-    type: '',
+    type: 'info',
     message: '',
   })
 

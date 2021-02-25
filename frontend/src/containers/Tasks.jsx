@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { SnackbarContext } from '../contexts/SnackbarContext';
 import { SNACK_COLOR } from '../SnackColor';
-import { fetchTasks, postTask } from "../apis/Tasks";
+import { deleteTask, fetchTasks, postTask } from "../apis/Tasks";
 import { 
   fetchTasksReducer,
   initialState as TasksListInitialState,
@@ -49,6 +49,24 @@ export const Tasks = () => {
     setTitleState("")
   };
 
+  const handleDelete = (task) => {
+    alert(`Delete Task : ${task.title}\nYou sure?`)
+    deleteTask(task.id)
+    .then((data) => {
+      dispatch({
+        type: tasksActionTypes.FETCH_SUCCESS,
+        payload: {
+          tasks: data.tasks
+        }
+      })
+      toggleSnack(true, `${SNACK_COLOR.success}`, 'Delete succeeded!')
+    })
+    .catch(e => {
+      console.error(e)
+      toggleSnack(true, `${SNACK_COLOR.error}`, 'ERROR!')
+    })
+  };
+
   useEffect(() => {
     dispatch({type: tasksActionTypes.FETCHING})
     fetchTasks()
@@ -75,7 +93,7 @@ export const Tasks = () => {
           handleSubmit={handleSubmit}
         />
       </CreateButtonWrapper>
-      <TaskContents tasksList={tasksState.tasksList} />
+      <TaskContents tasksList={tasksState.tasksList} handleDelete={handleDelete}/>
     </Fragment>
   )
 };

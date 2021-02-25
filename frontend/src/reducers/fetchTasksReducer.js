@@ -12,6 +12,9 @@ export const tasksActionTypes = {
 };
 
 export const fetchTasksReducer = (state, action) => {
+  const currentTasksList = state.tasksList;
+  let newTasksList = [];
+
   switch (action.type) {
     case tasksActionTypes.FETCHING:
       return {
@@ -24,13 +27,11 @@ export const fetchTasksReducer = (state, action) => {
         tasksList: action.payload.tasks,
       }
     case tasksActionTypes.ADD_TASK:
-      const currentTasksList = state.tasksList;
-      const newTasksList = [...currentTasksList, action.payload.task]
+      newTasksList = [...currentTasksList, action.payload.task]
       return {
         fetchState: REQUEST_STATE.OK,
         tasksList: newTasksList,
       }
-
     default:
       throw new Error();
   }

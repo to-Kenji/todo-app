@@ -20,9 +20,12 @@ module Api
       end
 
       def destroy
+        tasks = Task.all
         task = Task.find(params[:id])
         task.delete
-        render json: {}, status: :ok
+        render json: {
+          tasks: tasks
+        }, status: :ok
       end
 
       private

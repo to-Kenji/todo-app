@@ -1,16 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import styled from 'styled-components';
-
-const TasksPaper = styled(Paper)`
-  margin-top: 20px;
-  margin-bottom: 20px;
-  height: 30px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-`;
+import { ViewTask } from './ViewTask';
 
 export const TaskContents = (props) => {
   return (
@@ -19,13 +9,7 @@ export const TaskContents = (props) => {
         {
           props.tasksList.map((task) => {
             return (
-              <TasksPaper key={task.id}>      
-                <Grid item xs={10}>
-                  <p>
-                    {task.title}
-                  </p>
-                </Grid>
-              </TasksPaper>
+              <ViewTask task={task} key={task.id} handleDelete={props.handleDelete}/>
             )
           })
         } 

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { postsIndexUrl } from './urls';
+import { tasksIndexUrl, taskUrl } from './urls';
 
 export const fetchTasks = async() => {
-  return await axios.get(postsIndexUrl)
+  return await axios.get(tasksIndexUrl)
   .then(resp => {
     return resp.data
   })
@@ -10,11 +10,19 @@ export const fetchTasks = async() => {
 };
 
 export const postTask = async(params) => {
-  return await axios.post(postsIndexUrl, {
+  return await axios.post(tasksIndexUrl, {
     title: params.title
   })
   .then(resp => {
     return resp.data
   })
-  .catch((error) => {throw error;})
+  .catch(error => {throw error;})
 };
+
+export const deleteTask = async(params) => {
+  return await axios.delete(taskUrl(params))
+  .then(resp => {
+    return resp.data
+  })
+  .catch(error => {throw error;})
+}
