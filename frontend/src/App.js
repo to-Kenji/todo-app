@@ -8,15 +8,17 @@ import {
 import { Tasks } from './containers/Tasks';
 import { SnackbarContextProvider } from './contexts/SnackbarContext';
 import { SimpleSnackbar } from './containers/SimpleSnackbar';
+import Nabvar from './components/Nabvar';
 
 function App() {
   return (
     <SnackbarContextProvider>
-      <SimpleSnackbar />
       <Router>
-        <Switch>
-          <Route exact path='/tasks' component={Tasks}/>
-        </Switch>
+        <Nabvar />
+        <SimpleSnackbar />
+          <Switch>
+            <Route exact path='/tasks' component={Tasks}/>
+          </Switch>
       </Router>
     </SnackbarContextProvider>
   );

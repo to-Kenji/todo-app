@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const TasksPaper = styled(Paper)`
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 40px;
+  height: 30px;
   padding: 10px;
   display: flex;
   align-items: center;
