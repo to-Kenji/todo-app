@@ -8,7 +8,7 @@ import Alert from '@material-ui/lab/Alert';
 export const Profile = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false)
-  const { logOut, state } = useAuth();
+  const { logOut, userState } = useAuth();
   const history = useHistory();
 
   const handleLogOut = async() => {
@@ -24,18 +24,17 @@ export const Profile = () => {
   };
 
   const Check = () => {
-    console.log(state.currentUser)
+    console.log(userState.currentUser)
   }
   return (
     <>
       <p>This is the Profile page</p>
       {error && <Alert severity="error">{error}</Alert>}
       {
-        state.currentUser &&
+        userState.currentUser &&
           <div>
-            <p>EMAIL: {state.currentUser.email}</p>
-            <p>EMAIL: {state.currentUser.uid}</p>
-            <p>YOUR TASKS: </p>
+            <p>EMAIL: {userState.currentUser.email}</p>
+            <p>uid: {userState.currentUser.uid}</p>
             <Button disabled={loading} onClick={handleLogOut} variant="contained" color="primary">Log Out</Button>
             <Button onClick={Check} variant="contained" color="primary">check</Button>
           </div>

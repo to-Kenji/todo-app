@@ -36,7 +36,7 @@ export const LogIn = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { logIn, state } = useAuth();
+  const { logIn } = useAuth();
   const history = useHistory();
 
   async function handleLogIn(e) {
@@ -51,10 +51,6 @@ export const LogIn = () => {
       setLoading(false);
     }
   };
-
-  const Check = () => {
-    console.log(state.currentUser)
-  }
 
   return (
     <Grid container justify="center">
@@ -104,7 +100,6 @@ export const LogIn = () => {
             </CardContent>
           </Card>
         </CardWrapper>
-        <Button onClick={Check} variant="contained" color="primary">check</Button>
       </Grid>
     </Grid>
   );

@@ -13,7 +13,6 @@ import {
 import { TaskContents } from '../components/TaskContents';
 import { CreateTaskDialog } from '../components/CreateTaskDialog';
 
-import { Button } from '@material-ui/core';
 import { useAuth } from '../contexts/AuthContext';
 
 
@@ -28,7 +27,7 @@ export const Tasks = () => {
   const [titleState, setTitleState] = useState("")
   const { toggleSnack } = useContext(SnackbarContext);
 
-  const { state } = useAuth();
+  const { userState } = useAuth();
 
   const handleClose = () => {
     setDialogOpen(false)
@@ -38,7 +37,7 @@ export const Tasks = () => {
   const handleSubmit = () => {
     setDialogOpen(false)
     postTask({
-      user: state.currentUser,
+      user: userState.currentUser,
       title: titleState
     }).then(data => {
       dispatch({
@@ -60,7 +59,7 @@ export const Tasks = () => {
     alert(`Delete Task : ${task.title}\nYou sure?`)
     deleteTask({
       taskId: task.id,
-      userId: state.currentUser.id
+      userId: userState.currentUser.id
     })
     .then((data) => {
       dispatch({
@@ -77,13 +76,9 @@ export const Tasks = () => {
     })
   };
 
-  const Check = () => {
-    console.log(state.currentUser)
-  }
-
   useEffect(() => {
     dispatch({type: tasksActionTypes.FETCHING})
-    fetchTasks(state.currentUser)
+    fetchTasks(userState.currentUser)
     .then((data) => {
       dispatch({
         type: tasksActionTypes.FETCH_SUCCESS,
@@ -97,7 +92,6 @@ export const Tasks = () => {
 
   return (
     <Fragment>
-      <Button onClick={Check} variant="contained" color="primary">check</Button>
       <CreateButtonWrapper>
         <CreateTaskDialog
           isOpen={dialogOpen}

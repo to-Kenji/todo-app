@@ -7,9 +7,11 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
-import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { UserMenu } from './UserMenu';
+import { useAuth } from '../contexts/AuthContext';
+import { Button } from '@material-ui/core';
 
 const NavLink = styled(Link)`
   text-decoration: none;
@@ -58,6 +60,7 @@ function ScrollTop(props) {
 }
 
 export default function Nabvar(props) {
+  const { userState } = useAuth();
   const classes = useStyles();
   return (
     <div className={classes.parent}>
@@ -66,9 +69,13 @@ export default function Nabvar(props) {
           <Typography variant="h6" className={classes.title}>
             <NavLink to="/">SimpleTaskNote</NavLink>
           </Typography>
-          <Button color="inherit">
-            <Link to="/me">MyPage</Link>
-          </Button>
+          {
+            userState.currentUser ?
+              <UserMenu/>
+            :
+              <Button style={{textTransform: 'none'}}><NavLink to='/login'>Login</NavLink></Button>
+          }
+          
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

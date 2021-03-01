@@ -25,7 +25,7 @@ export const AuthProvider = (props) => {
     return auth.signOut()
   };
 
-  const [state, dispatch] = useReducer(userReducer, initialState);
+  const [userState, dispatch] = useReducer(userReducer, initialState);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       dispatch({type: userActionTypes.LODAING})
@@ -66,39 +66,16 @@ export const AuthProvider = (props) => {
     return unsubscribe
   }, [])
 
-
-  // useEffect(() => {
-  //   console.log('useEffect')
-  //   auth.onAuthStateChanged(user => {
-  //     console.log('serching user...')
-  //     if (user) {
-  //       console.log('Yes! User')
-  //       fetchUser(user)
-  //       .then(resp => {
-  //         console.log('set')
-  //         setCurrentUser(resp.user)
-  //         setLoading(false)
-  //       })
-  //     } else {
-  //       console.log('no user')
-  //       setCurrentUser()
-  //       setLoading(false)
-  //     }
-  //   })
-  //   console.log('auth')
-  //   // return unsubscribe
-  // }, [])
-
   const value = {
     signUp,
     logIn,
     logOut,
-    state
+    userState
   }
 
   return (
     <AuthContext.Provider value={value}>
-      {state.fetchState === REQUEST_STATE.OK && props.children}
+      {userState.fetchState === REQUEST_STATE.OK && props.children}
     </AuthContext.Provider>
   )
 }

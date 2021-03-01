@@ -21,7 +21,7 @@ export const SimpleSnackbar = () => {
           horizontal: 'left',
         }}
         open={snackState.isOpen}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
         >
         <Alert onClose={handleClose} severity={snackState.type}>
