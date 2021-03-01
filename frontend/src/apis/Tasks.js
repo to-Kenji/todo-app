@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { tasksIndexUrl, taskUrl } from './urls';
 
-export const fetchTasks = () => {
-  return axios.get(tasksIndexUrl)
+export const fetchTasks = (user) => {
+  return axios.get(tasksIndexUrl(user.id))
   .then(resp => {
     return resp.data
   })
@@ -10,7 +10,7 @@ export const fetchTasks = () => {
 };
 
 export const postTask = (params) => {
-  return axios.post(tasksIndexUrl, {
+  return axios.post(tasksIndexUrl(params.user.id), {
     title: params.title
   })
   .then(resp => {

@@ -1,15 +1,17 @@
 module Api
   module V1
     class TasksController < ApplicationController
+      before_action :set_current_user
+
       def index
-        tasks = Task.all
+        tasks = @current_user.tasks
         render json: {
           tasks: tasks
         }, status: :ok
       end
 
       def create
-        task = Task.new(task_params)
+        task = @current_user.tasks.build(task_params)
         if task.save
           render json: {
             task: task
@@ -20,11 +22,10 @@ module Api
       end
 
       def destroy
-        tasks = Task.all
-        task = Task.find(params[:id])
+        task = @current_user.tasks.find(params[:task_id])
         task.delete
         render json: {
-          tasks: tasks
+          tasks: @current_user.tasks
         }, status: :ok
       end
 
@@ -33,6 +34,11 @@ module Api
       def task_params
         params.require(:task).permit(:title)
       end
+
+      def set_current_user
+        @current_user = User.find(params[:user_id])
+      end
+
     end
   end
 end

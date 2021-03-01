@@ -38,6 +38,7 @@ export const Tasks = () => {
   const handleSubmit = () => {
     setDialogOpen(false)
     postTask({
+      user: state.currentUser,
       title: titleState
     }).then(data => {
       dispatch({
@@ -57,7 +58,10 @@ export const Tasks = () => {
 
   const handleDelete = (task) => {
     alert(`Delete Task : ${task.title}\nYou sure?`)
-    deleteTask(task.id)
+    deleteTask({
+      taskId: task.id,
+      userId: state.currentUser.id
+    })
     .then((data) => {
       dispatch({
         type: tasksActionTypes.FETCH_SUCCESS,
@@ -79,7 +83,7 @@ export const Tasks = () => {
 
   useEffect(() => {
     dispatch({type: tasksActionTypes.FETCHING})
-    fetchTasks()
+    fetchTasks(state.currentUser)
     .then((data) => {
       dispatch({
         type: tasksActionTypes.FETCH_SUCCESS,
