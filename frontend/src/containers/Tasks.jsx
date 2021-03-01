@@ -13,6 +13,10 @@ import {
 import { TaskContents } from '../components/TaskContents';
 import { CreateTaskDialog } from '../components/CreateTaskDialog';
 
+import { Button } from '@material-ui/core';
+import { useAuth } from '../contexts/AuthContext';
+
+
 const CreateButtonWrapper = styled.div`
   text-align: center;
   margin-top: 20px;
@@ -23,6 +27,8 @@ export const Tasks = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [titleState, setTitleState] = useState("")
   const { toggleSnack } = useContext(SnackbarContext);
+
+  const { state } = useAuth();
 
   const handleClose = () => {
     setDialogOpen(false)
@@ -67,6 +73,10 @@ export const Tasks = () => {
     })
   };
 
+  const Check = () => {
+    console.log(state.currentUser)
+  }
+
   useEffect(() => {
     dispatch({type: tasksActionTypes.FETCHING})
     fetchTasks()
@@ -83,6 +93,7 @@ export const Tasks = () => {
 
   return (
     <Fragment>
+      <Button onClick={Check} variant="contained" color="primary">check</Button>
       <CreateButtonWrapper>
         <CreateTaskDialog
           isOpen={dialogOpen}

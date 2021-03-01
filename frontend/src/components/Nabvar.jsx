@@ -60,13 +60,15 @@ function ScrollTop(props) {
 export default function Nabvar(props) {
   const classes = useStyles();
   return (
-    <React.Fragment className={classes.parent}>
+    <div className={classes.parent}>
       <AppBar>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <NavLink to="/tasks">SimpleTaskNote</NavLink>
+            <NavLink to="/">SimpleTaskNote</NavLink>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">
+            <Link to="/me">MyPage</Link>
+          </Button>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
@@ -75,7 +77,7 @@ export default function Nabvar(props) {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-    </React.Fragment>
+    </div>
   );
 }
 

@@ -26,6 +26,7 @@ const CustomGrid = styled(Grid)`
   display: flex;
   align-items: center;
 `;
+
 export const ViewTask = (props) => {
   return (
     <TasksPaper>
