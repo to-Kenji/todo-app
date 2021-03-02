@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
-  parent: {
-    flexGrow: 1,
-  },
   title: {
     flexGrow: 1,
   }
@@ -63,7 +60,7 @@ export default function Nabvar(props) {
   const { userState } = useAuth();
   const classes = useStyles();
   return (
-    <div className={classes.parent}>
+    <div>
       <AppBar>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -73,12 +70,14 @@ export default function Nabvar(props) {
             userState.currentUser ?
               <UserMenu/>
             :
-              <Button style={{textTransform: 'none'}}><NavLink to='/login'>Login</NavLink></Button>
+              <Button style={{textTransform: 'none'}}>
+                <NavLink to='/login'>Login</NavLink>
+              </Button>
           }
           
         </Toolbar>
       </AppBar>
-      <Toolbar id="back-to-top-anchor" />
+      <Toolbar id="back-to-top-anchor"/>
       <ScrollTop {...props}>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

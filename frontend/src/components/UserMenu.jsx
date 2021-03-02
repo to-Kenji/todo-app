@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useAuth } from '../contexts/AuthContext';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 import styled from 'styled-components';
 
@@ -18,7 +19,7 @@ const LogOutLink = styled(Link)`
 export const UserMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { logOut, userState } = useAuth();
+  const { logOut } = useAuth();
   const { toggleSnack } = useContext(SnackbarContext);
   const history = useHistory();
 
@@ -44,7 +45,7 @@ export const UserMenu = () => {
   return (
     <div>
       <Button style={{textTransform: 'none'}} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        {userState.currentUser.email}
+        <AccountBoxIcon fontSize="large"/>
       </Button>
       <Menu
         id="simple-menu"

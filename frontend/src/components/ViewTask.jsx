@@ -26,14 +26,14 @@ const TrashButton = styled(DeleteIcon)`
 const CustomGrid = styled(Grid)`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export const ViewTask = (props) => {
   return (
     <TasksPaper>
-      <Grid container justify="space-between">
-        <Grid item xs={11}>
+      <Grid container justify="center">
+        <Grid item xs={10}>
           <TaskTitleWrapper>
             <p>{props.task.title}</p>
           </TaskTitleWrapper>

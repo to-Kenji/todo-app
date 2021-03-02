@@ -15,12 +15,12 @@ import { CreateTaskDialog } from '../components/CreateTaskDialog';
 
 import { useAuth } from '../contexts/AuthContext';
 
-
 const CreateButtonWrapper = styled.div`
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
 `;
+
 export const Tasks = () => {
   const [tasksState, dispatch] = useReducer(fetchTasksReducer, TasksListInitialState);
   const [dialogOpen, setDialogOpen] = useState(false);
