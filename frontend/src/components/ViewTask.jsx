@@ -7,8 +7,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const TasksPaper = styled(Paper)`
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 30px;
-  padding: 10px;
   align-items: center;
   display: flex;
 `;
@@ -16,27 +14,31 @@ const TasksPaper = styled(Paper)`
 const TaskTitleWrapper = styled.div`
   display: flex;
   align-items: center;
+  padding-right: 5px;
+  padding-left: 5px;
 `;
 
 const TrashButton = styled(DeleteIcon)`
   cursor: pointer;
   color: #3f51b5;
 `;
+
 const CustomGrid = styled(Grid)`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 `;
 
 export const ViewTask = (props) => {
   return (
     <TasksPaper>
       <Grid container justify="space-between">
-        <Grid item xs={10}>
+        <Grid item xs={11}>
           <TaskTitleWrapper>
             <p>{props.task.title}</p>
           </TaskTitleWrapper>
         </Grid>
-        <CustomGrid item xs={2}>
+        <CustomGrid item xs={1}>
           <TrashButton onClick={() => props.handleDelete(props.task)} />
         </CustomGrid>
       </Grid>

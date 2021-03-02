@@ -59,7 +59,7 @@ export const SignUp = () => {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={11} sm={5}>
+      <Grid item xs={12} sm={6}>
         <CardWrapper>
           <Card>
             <CardContent>

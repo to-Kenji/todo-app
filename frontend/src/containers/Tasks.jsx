@@ -56,24 +56,26 @@ export const Tasks = () => {
   };
 
   const handleDelete = (task) => {
-    alert(`Delete Task : ${task.title}\nYou sure?`)
-    deleteTask({
-      taskId: task.id,
-      userId: userState.currentUser.id
-    })
-    .then((data) => {
-      dispatch({
-        type: tasksActionTypes.FETCH_SUCCESS,
-        payload: {
-          tasks: data.tasks
-        }
+    const resp = window.confirm(`Delete Task : ${task.title}\nYou sure?`)
+    if (resp === true) {
+      deleteTask({
+        taskId: task.id,
+        userId: userState.currentUser.id
       })
-      toggleSnack(true, `${SNACK_COLOR.success}`, 'Delete succeeded!')
-    })
-    .catch(e => {
-      console.error(e)
-      toggleSnack(true, `${SNACK_COLOR.error}`, 'ERROR!')
-    })
+      .then((data) => {
+        dispatch({
+          type: tasksActionTypes.FETCH_SUCCESS,
+          payload: {
+            tasks: data.tasks
+          }
+        })
+        toggleSnack(true, `${SNACK_COLOR.success}`, 'Delete succeeded!')
+      })
+      .catch(e => {
+        console.error(e)
+        toggleSnack(true, `${SNACK_COLOR.error}`, 'ERROR!')
+      })
+    }
   };
 
   useEffect(() => {

@@ -28,7 +28,7 @@ export const CreateTaskDialog = ({
             It is better for you to make a task as "detailed and small" as possible.
           </DialogContentText>
           <DialogContentText>
-            タスクは可能な限り「詳細」且つ「小刻み」に。
+            タスクは可能な限り「詳細」且つ「小刻み」に。(40文字以内)
           </DialogContentText>
           <TextField
             autoFocus
