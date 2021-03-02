@@ -4,7 +4,7 @@ module Api
       before_action :set_current_user
 
       def index
-        tasks = @current_user.tasks
+        tasks = @current_user.tasks.recent
         render json: {
           tasks: tasks
         }, status: :ok
@@ -25,7 +25,7 @@ module Api
         task = @current_user.tasks.find(params[:task_id])
         task.delete
         render json: {
-          tasks: @current_user.tasks
+          tasks: @current_user.tasks.recent
         }, status: :ok
       end
 

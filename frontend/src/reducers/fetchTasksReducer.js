@@ -27,7 +27,7 @@ export const fetchTasksReducer = (state, action) => {
         tasksList: action.payload.tasks,
       }
     case tasksActionTypes.ADD_TASK:
-      newTasksList = [...currentTasksList, action.payload.task]
+      newTasksList = [action.payload.task, ...currentTasksList ]
       return {
         fetchState: REQUEST_STATE.OK,
         tasksList: newTasksList,
