@@ -35,6 +35,7 @@ export const UserMenu = () => {
     try {
       setLoading(true)
       await logOut()
+      toggleSnack(true, `${SNACK_COLOR.info}`, 'See you soon!')
       history.push('/login')
     } catch {
       toggleSnack(true, `${SNACK_COLOR.error}`, 'ERROR. Logout failed.')

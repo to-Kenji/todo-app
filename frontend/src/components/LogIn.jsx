@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -15,6 +15,8 @@ import { Button } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 import { useAuth } from '../contexts/AuthContext';
+import { SnackbarContext } from '../contexts/SnackbarContext';
+import { SNACK_COLOR } from '../SnackColor';
 
 const CardWrapper = styled.div`
   margin: 30px 0;
@@ -38,6 +40,7 @@ export const LogIn = () => {
 
   const { logIn } = useAuth();
   const history = useHistory();
+  const { toggleSnack } = useContext(SnackbarContext);
 
   async function handleLogIn(e) {
     e.preventDefault()
@@ -45,6 +48,7 @@ export const LogIn = () => {
       setError('')
       setLoading(true)
       await logIn(email, password)
+      toggleSnack(true, `${SNACK_COLOR.info}`, `Welcome back, ${email}!`)
       history.push('/')
     } catch {
       setError('Failed to log in.')
