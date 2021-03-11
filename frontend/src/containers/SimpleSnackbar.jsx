@@ -10,7 +10,7 @@ export const SimpleSnackbar = () => {
     if (reason === 'clickaway') {
       return;
     }
-    toggleSnack(false, 'success', '');
+    toggleSnack(false, snackState.type, '');
   };
 
   return (
