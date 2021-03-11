@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -9,6 +9,9 @@ import { Grid } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 import styled from 'styled-components';
+
+import { SnackbarContext } from '../contexts/SnackbarContext';
+import { SNACK_COLOR } from '../SnackColor';
 
 const CardWrapper = styled.div`
   margin: 30px 0;
@@ -25,12 +28,14 @@ export const Profile = () => {
   const [loading, setLoading] = useState(false)
   const { logOut, userState } = useAuth();
   const history = useHistory();
+  const { toggleSnack } = useContext(SnackbarContext);
 
   const handleLogOut = async() => {
     setError('')
     try {
       setLoading(true)
       await logOut()
+      toggleSnack(true, `${SNACK_COLOR.info}`, 'See you soon!')
       history.push('/login')
     } catch {
       setError('Failed to log out.')

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -15,6 +15,8 @@ import { Button } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 import { useAuth } from '../contexts/AuthContext';
+import { SnackbarContext } from '../contexts/SnackbarContext';
+import { SNACK_COLOR } from '../SnackColor';
 
 const CardWrapper = styled.div`
   margin: 30px 0;
@@ -39,6 +41,7 @@ export const SignUp = () => {
 
   const { signUp } = useAuth();
   const history = useHistory();
+  const { toggleSnack } = useContext(SnackbarContext);
 
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -50,6 +53,7 @@ export const SignUp = () => {
       setError('')
       setLoading(true)
       await signUp(email, password)
+      toggleSnack(true, `${SNACK_COLOR.info}`, `Welcome, ${email}!`)
       history.push('/')
     } catch {
       setError('Failed to create an account.')
